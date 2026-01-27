@@ -1,0 +1,213 @@
+Create a 30-second promotional video for Teachfluence (teachfluence.com)
+Product: Online education management platform for educators, coaches, and consultants.
+
+Required Assets (place in public/ folder for staticFile() access)
+
+- ./images/logo-full.png - Teachfluence logo (dark navy text + blue swoosh)
+- ./images/content-management.jpg - Course management dashboard screenshot
+- ./images/web_editor.webp - Drag & drop website builder screenshot
+- ./images/mail.png - Email marketing interface (desktop + mobile preview)
+- ./images/income.png - Email analytics dashboard with delivery/open/click metrics
+- ./images/fluakademi.png - Client showcase card (team, mobile, stats)
+
+Color Theme (from pi-education-web design system)
+
+- Background: hsl(0, 0%, 100%) / #ffffff
+- Background Alt: hsl(210, 40%, 96.1%) / #f3f4f6
+- Primary: hsl(240, 84%, 42%) (Deep Indigo/Blue)
+- Primary Foreground: hsl(210, 100%, 93.3%) (Light Blue)
+- Secondary: hsl(240, 4.8%, 95.9%) (Light Gray)
+- Text: hsl(222.2, 84%, 4.9%) / #0f1117
+- Text Muted: hsl(215.4, 16.3%, 46.9%) / #6b7280
+- Border: hsl(214.3, 31.8%, 91.4%)
+- Destructive: hsl(0, 84.2%, 60.2%) (Red - for contrast accents)
+- Warning/Accent: hsl(17, 88.3%, 40.4%) (Orange - for highlights)
+
+Font
+
+- Inter (weights: 400, 600, 700, 800) via @remotion/google-fonts/Inter
+
+---
+Scene Structure (8 Scenes)
+
+Scene 1: Opening (4.5s)
+
+- Background: white
+- Logo (logo-full.png) centered, scales in from 0 to 1 with spring animation
+  (config: { damping: 12, stiffness: 100 })
+- After logo settles: "teachfluence.com" text reveals left-to-right below logo
+  using clip-path interpolation (clipPath: inset(0 X% 0 0) animating X from 100 to 0)
+- Tagline fades in 0.5s after URL: "The Modern Platform for Online Education"
+  in Text Muted color, font-weight 400, font-size 24px
+
+Scene 2: Value Proposition (3s)
+
+- Background: white
+- Three words appear sequentially with spring animation, staggered by 8 frames:
+  "Create." (Primary color)
+  "Teach." (Warning/Accent color - orange)
+  "Grow." (Primary color)
+- Each word: font-size 72px, font-weight 800
+- Spring config: { damping: 10, stiffness: 120 } for bouncy entrance
+- Words scale from 0.5 to 1 and opacity from 0 to 1 simultaneously
+- Centered vertically and horizontally, stacked or on a single line
+
+Scene 3: Course Management (4.5s)
+
+- Title at top: "Manage your courses effortlessly" (font-size 40px, weight 700,
+  Text color)
+- Subtitle: "Track students, analytics & revenue in one dashboard" (Text Muted,
+  font-size 20px, weight 400)
+- Browser-like frame (1400x800) with macOS traffic lights (red/yellow/green dots)
+  and URL bar showing "teachfluence.com/admin/courses"
+- content-management.jpg displayed inside the browser frame using <Img> component
+  from remotion with staticFile()
+- Image scrolls vertically inside the frame with eased animation:
+  interpolate() with Easing.inOut(Easing.cubic), translateY from 0 to -30%
+  over the scene duration
+- Subtle drop shadow on the browser frame (0 20px 60px rgba(0,0,0,0.1))
+- Browser frame enters with spring scale animation from 0.9 to 1, opacity 0 to 1
+
+Scene 4: Website Builder (4.5s)
+
+- Title at top: "Build your education website" (font-size 40px, weight 700)
+- Subtitle: "Drag & drop page builder with custom domains" (Text Muted)
+- Browser-like frame (1400x800) same style as Scene 3
+  URL bar showing "teachfluence.com/admin/website"
+- web_editor.webp displayed inside with <Img> component
+- Image scrolls vertically with eased animation similar to Scene 3
+- 3 floating pill-shaped labels around the browser edges, appearing with staggered
+  spring animations (delay 15 frames apart):
+  - "Drag & Drop" (Primary bg, white text) - top-right
+  - "Templates" (Warning/Accent bg, white text) - bottom-left
+  - "Custom Domain" (Primary bg, white text) - bottom-right
+- Each pill: rounded-full, padding 8px 20px, font-size 14px, weight 600
+- Pills float with subtle sine wave animation: translateY offset using
+  Math.sin(frame * 0.05) * 5
+
+Scene 5: Email Marketing (4s)
+
+- Title at top: "Grow with email marketing" (font-size 40px, weight 700)
+- Subtitle: "Automated campaigns with detailed analytics" (Text Muted)
+- Browser-like frame showing mail.png with <Img> component
+  URL bar showing "teachfluence.com/admin/email"
+- Image scrolls vertically with eased animation
+- 3 floating stat badges appearing with staggered spring animations:
+  - "94.9% Delivery" (Primary bg, white text)
+  - "22.2% Open Rate" (Warning/Accent bg, white text)
+  - "2.6% Click Rate" (Primary bg, white text)
+- Stat values from income.png analytics data
+- Badges positioned around the browser frame edges with floating animation
+
+Scene 6: All-in-One Features (4s)
+
+- Background: Background Alt color (#f3f4f6)
+- Title: "Everything you need" centered (font-size 44px, weight 800, Text color)
+- 4 feature cards in a 2x2 grid, appearing sequentially with spring animation
+  (staggered 6 frames apart):
+  - Course Management (graduation-cap SVG icon)
+    "Create and sell online courses"
+  - Website Builder (layout SVG icon)
+    "Drag & drop page builder"
+  - Email Marketing (mail SVG icon)
+    "Automated campaigns & analytics"
+  - Student Analytics (bar-chart SVG icon)
+    "Track progress & engagement"
+- Each card: 280x160, white background, 12px border-radius, subtle border
+  (Border color), padding 24px
+- Card has colored icon circle (48px, Primary bg, white icon) at top
+- Feature name: font-size 18px, weight 700, Text color
+- Description: font-size 14px, weight 400, Text Muted color
+- Cards enter with spring scale (0.8 to 1) + opacity (0 to 1)
+
+Scene 7: Social Proof (4.5s)
+
+- Background: white
+- fluakademi.png displayed as a showcase card with rounded corners (16px) and
+  drop shadow, centered, max-width 700px, using <Img> component
+- Image enters with spring scale animation (0.9 to 1) + opacity
+- Below the image, stats row appears with staggered fade-in (8 frames apart):
+  - "2,000+ Students" (font-size 20px, weight 700, Primary color)
+  - "Active Courses" (font-size 20px, weight 700, Text color)
+  - "Growing Community" (font-size 20px, weight 700, Warning/Accent color)
+- Badge at top: "Trusted by educators worldwide" with a star SVG icon
+  (Primary bg, white text, rounded pill)
+- Badge enters with spring animation before the image
+
+Scene 8: CTA (4s)
+
+- Background glow animation: pulsing radial gradient centered on screen
+  using interpolate() with Math.sin() for continuous pulse
+  Gradient: Primary color at 10% opacity pulsing between 200px and 400px radius
+- Title: "Start teaching today" (font-size 52px, weight 800, Text color)
+  enters with spring scale animation
+- Large CTA button below title: logo-full.png (small, 32px height) +
+  "teachfluence.com" text (font-size 24px, weight 700, white)
+  Button background: Primary color, border-radius 16px, padding 16px 40px
+  Button has subtle pulse animation (scale 1.0 to 1.03) using Math.sin()
+- Subtitle below button: "Your all-in-one education platform"
+  (Text Muted, font-size 18px, weight 400, fades in after button)
+
+---
+Transitions (12 frames each at 30fps = 0.4s)
+
+Use TransitionSeries from @remotion/transitions for scene management.
+Use linearTiming({ durationInFrames: 12 }) for all transitions.
+
+- Scene 1→2: fade() from @remotion/transitions/fade
+- Scene 2→3: slide({ direction: 'from-right' }) from @remotion/transitions/slide
+- Scene 3→4: fade()
+- Scene 4→5: fade()
+- Scene 5→6: slide({ direction: 'from-right' })
+- Scene 6→7: slide({ direction: 'from-bottom' })
+- Scene 7→8: fade()
+
+Total duration calculation:
+Scene durations in frames (at 30fps): 135 + 90 + 135 + 135 + 120 + 120 + 135 + 120 = 990
+Minus 7 transitions × 12 frames = 84
+Effective total: 906 frames = 30.2s ≈ 30s
+
+---
+Remotion Technical Requirements
+
+Animation Rules:
+- ALL animations MUST be driven by useCurrentFrame() hook
+- CSS transitions and CSS animations are FORBIDDEN
+- Tailwind animation class names are FORBIDDEN
+- Use spring() from remotion for bouncy/natural motion (returns 0 to 1)
+- Use interpolate() from remotion for mapping frame ranges to values
+- Use Easing.inOut(Easing.cubic) for smooth scroll animations
+- Use Math.sin()/Math.cos() with frame for floating/pulsing animations
+- Use staggered spring delays for sequential element appearances
+
+Image Rules:
+- MUST use <Img> component from remotion (NOT native <img> or CSS background-image)
+- Use staticFile() to reference images in the public/ folder
+- Example: <Img src={staticFile("images/logo-full.png")} />
+
+Font Loading:
+- Use @remotion/google-fonts/Inter for font loading
+- Load weights: 400, 600, 700, 800
+- Example:
+  import { loadFont } from "@remotion/google-fonts/Inter";
+  const { fontFamily } = loadFont("normal", {
+    weights: ["400", "600", "700", "800"],
+    subsets: ["latin"],
+  });
+
+Scene Management:
+- Use TransitionSeries from @remotion/transitions
+- Each scene is a TransitionSeries.Sequence with durationInFrames
+- Transitions use TransitionSeries.Transition with presentation and timing props
+- Install @remotion/transitions if not present
+
+Icon Components:
+- All icons must be custom SVG components (no emojis, no icon libraries)
+- Keep SVGs simple and clean, matching the Primary color
+- Icons needed: graduation-cap, layout, mail, bar-chart, star, check
+
+Key Reusable Components:
+- BrowserFrame: macOS-style browser chrome with traffic lights + URL bar
+- FeatureCard: icon + title + description card with spring entrance
+- StatBadge: floating pill with stat text
+- Scene wrapper components for consistent padding/layout
