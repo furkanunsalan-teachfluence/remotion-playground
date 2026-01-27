@@ -7,128 +7,148 @@ import {
   useVideoConfig,
   spring,
   interpolate,
-  Easing,
 } from "remotion";
 import { COLORS, fontFamily } from "./constants";
-import { BrowserFrame } from "./BrowserFrame";
 
+// Pills arranged in an elliptical pattern around the centered image
 const pills = [
-  {
-    text: "Drag & Drop",
-    bg: COLORS.primary,
-    position: { top: 160, right: -60 } as React.CSSProperties,
-  },
-  {
-    text: "Templates",
-    bg: COLORS.warningAccent,
-    position: { bottom: 60, left: -50 } as React.CSSProperties,
-  },
-  {
-    text: "Custom Domain",
-    bg: COLORS.primary,
-    position: { bottom: 40, right: -70 } as React.CSSProperties,
-  },
-];
+  { text: "Gerçek Zamanlı Önizleme", left: 720, top: 150 },
+  { text: "Renk Temaları", left: 1010, top: 285 },
+  { text: "Hazır Bloklar", left: 995, top: 470 },
+  { text: "Sürükle Bırak", left: 765, top: 590 },
+  { text: "Otomatik Kaydetme", left: 350, top: 590 },
+  { text: "Yapay Zeka Desteği", left: 115, top: 470 },
+  { text: "Responsive Tasarım", left: 95, top: 285 },
+  { text: "Geri Alma & Yineleme Desteği", left: 305, top: 150 },
+] as const;
 
 export const Scene4WebsiteBuilder: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps, durationInFrames } = useVideoConfig();
+  const { fps } = useVideoConfig();
 
-  // Image scroll
-  const scrollY = interpolate(frame, [0, durationInFrames], [0, -30], {
-    easing: Easing.inOut(Easing.cubic),
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
+  // Title entrance
+  const titleSpring = spring({
+    frame,
+    fps,
+    config: { damping: 12, stiffness: 100 },
   });
+  const titleOpacity = interpolate(titleSpring, [0, 1], [0, 1]);
+  const titleY = interpolate(titleSpring, [0, 1], [20, 0]);
+
+  // Image entrance
+  const imageSpring = spring({
+    frame,
+    fps,
+    delay: 5,
+    config: { damping: 12, stiffness: 100 },
+  });
+  const imageScale = interpolate(imageSpring, [0, 1], [0.9, 1]);
+  const imageOpacity = interpolate(imageSpring, [0, 1], [0, 1]);
 
   return (
     <AbsoluteFill
       style={{
         backgroundColor: COLORS.background,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        paddingTop: 40,
         fontFamily,
       }}
     >
       {/* Title */}
       <div
         style={{
+          position: "absolute",
+          top: 40,
+          left: 0,
+          right: 0,
+          textAlign: "center",
           fontSize: 40,
           fontWeight: 700,
           color: COLORS.text,
-          textAlign: "center",
+          opacity: titleOpacity,
+          transform: `translateY(${titleY}px)`,
         }}
       >
-        Build your education website
+        Eğitim web sitenizi oluşturun
       </div>
 
       {/* Subtitle */}
       <div
         style={{
+          position: "absolute",
+          top: 90,
+          left: 0,
+          right: 0,
+          textAlign: "center",
           fontSize: 20,
           fontWeight: 400,
           color: COLORS.textMuted,
-          textAlign: "center",
-          marginTop: 8,
+          opacity: titleOpacity,
         }}
       >
-        Drag & drop page builder with custom domains
+        Sürükle bırak editörü ile özel alan adı desteği
       </div>
 
-      {/* Browser frame with floating pills */}
-      <div style={{ marginTop: 24, position: "relative" }}>
-        <BrowserFrame url="teachfluence.com/admin/website">
-          <Img
-            src={staticFile("images/web_editor.webp")}
+      {/* Centered image */}
+      <div
+        style={{
+          position: "absolute",
+          top: 140,
+          left: "50%",
+          transform: `translateX(-50%) scale(${imageScale})`,
+          opacity: imageOpacity,
+          width: 520,
+          height: 520,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Img
+          src={staticFile("images/web_editor.webp")}
+          style={{
+            width: "100%",
+            objectFit: "cover",
+            objectPosition: "top",
+          }}
+        />
+      </div>
+
+      {/* Floating pills */}
+      {pills.map((pill, i) => {
+        const pillSpring = spring({
+          frame,
+          fps,
+          delay: 12,
+          config: { damping: 12, stiffness: 120 },
+        });
+
+        const pillOpacity = interpolate(pillSpring, [0, 1], [0, 1]);
+        const pillScale = interpolate(pillSpring, [0, 1], [0.5, 1]);
+        const floatY = Math.sin(frame * 0.04 + i * 1.2) * 4;
+
+        return (
+          <div
+            key={pill.text}
             style={{
-              width: "100%",
-              objectFit: "cover",
-              objectPosition: "top",
-              transform: `translateY(${scrollY}%)`,
+              position: "absolute",
+              top: pill.top,
+              left: pill.left,
+              opacity: pillOpacity,
+              transform: `scale(${pillScale}) translateY(${floatY}px)`,
+              background: i % 2 === 0 ? COLORS.primary : COLORS.warningAccent,
+              color: "white",
+              borderRadius: 9999,
+              padding: "10px 22px",
+              fontSize: 14,
+              fontWeight: 600,
+              fontFamily,
+              whiteSpace: "nowrap",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
             }}
-          />
-        </BrowserFrame>
-
-        {/* Floating pills */}
-        {pills.map((pill, i) => {
-          const pillSpring = spring({
-            frame,
-            fps,
-            delay: 15 + i * 15,
-            config: { damping: 12, stiffness: 120 },
-          });
-
-          const pillOpacity = interpolate(pillSpring, [0, 1], [0, 1]);
-          const pillScale = interpolate(pillSpring, [0, 1], [0.5, 1]);
-          const floatY = Math.sin(frame * 0.05 + i) * 5;
-
-          return (
-            <div
-              key={pill.text}
-              style={{
-                position: "absolute",
-                ...pill.position,
-                opacity: pillOpacity,
-                transform: `scale(${pillScale}) translateY(${floatY}px)`,
-                background: pill.bg,
-                color: "white",
-                borderRadius: 9999,
-                padding: "8px 20px",
-                fontSize: 14,
-                fontWeight: 600,
-                fontFamily,
-                whiteSpace: "nowrap",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-              }}
-            >
-              {pill.text}
-            </div>
-          );
-        })}
-      </div>
+          >
+            {pill.text}
+          </div>
+        );
+      })}
     </AbsoluteFill>
   );
 };

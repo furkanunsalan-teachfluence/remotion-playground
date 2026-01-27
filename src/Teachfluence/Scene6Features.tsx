@@ -10,31 +10,43 @@ import { COLORS, fontFamily } from "./constants";
 import { FeatureCard } from "./FeatureCard";
 import {
   GraduationCapIcon,
-  LayoutIcon,
+  VideoIcon,
   MailIcon,
-  BarChartIcon,
+  PackageIcon,
+  LayoutIcon,
+  CreditCardIcon,
 } from "./icons";
 
 const features = [
   {
     icon: <GraduationCapIcon size={24} color="white" />,
-    title: "Course Management",
-    description: "Create and sell online courses",
+    title: "Kurslar",
+    description: "Kolayca kurs oluşturun ve satın",
   },
   {
-    icon: <LayoutIcon size={24} color="white" />,
-    title: "Website Builder",
-    description: "Drag & drop page builder",
+    icon: <VideoIcon size={24} color="white" />,
+    title: "1:1 ve Webinarlar",
+    description: "Canlı dersler ve görüşmeler",
   },
   {
     icon: <MailIcon size={24} color="white" />,
-    title: "Email Marketing",
-    description: "Automated campaigns & analytics",
+    title: "Mail Marketing",
+    description: "Otomatik kampanyalar ve analizler",
   },
   {
-    icon: <BarChartIcon size={24} color="white" />,
-    title: "Student Analytics",
-    description: "Track progress & engagement",
+    icon: <PackageIcon size={24} color="white" />,
+    title: "Dijital Ürünler",
+    description: "E-kitap ve şablon satışı",
+  },
+  {
+    icon: <LayoutIcon size={24} color="white" />,
+    title: "Website Editörü",
+    description: "Sürükle bırak sayfa editörü",
+  },
+  {
+    icon: <CreditCardIcon size={24} color="white" />,
+    title: "Ödeme Altyapısı",
+    description: "Güvenli ödeme entegrasyonu",
   },
 ];
 
@@ -60,7 +72,7 @@ export const Scene6Features: React.FC = () => {
         alignItems: "center",
         justifyContent: "center",
         fontFamily,
-        gap: 40,
+        gap: 36,
       }}
     >
       {/* Title */}
@@ -74,14 +86,14 @@ export const Scene6Features: React.FC = () => {
           transform: `translateY(${titleY}px)`,
         }}
       >
-        Everything you need
+        İhtiyacınız olan her şey
       </div>
 
-      {/* 2x2 Grid */}
+      {/* 3x2 Grid */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+          gridTemplateColumns: "1fr 1fr 1fr",
           gap: 20,
         }}
       >
@@ -91,7 +103,7 @@ export const Scene6Features: React.FC = () => {
             icon={feature.icon}
             title={feature.title}
             description={feature.description}
-            delay={10 + i * 6}
+            delay={10 + i * 5}
           />
         ))}
       </div>

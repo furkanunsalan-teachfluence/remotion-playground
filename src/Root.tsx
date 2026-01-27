@@ -8,13 +8,12 @@ const totalSceneFrames =
   SCENE_DURATIONS.scene2 +
   SCENE_DURATIONS.scene3 +
   SCENE_DURATIONS.scene4 +
-  SCENE_DURATIONS.scene5 +
   SCENE_DURATIONS.scene6 +
   SCENE_DURATIONS.scene7 +
   SCENE_DURATIONS.scene8;
 
-// 7 transitions between 8 scenes
-const totalTransitionFrames = 7 * TRANSITION_DURATION;
+// 6 transitions between 7 scenes
+const totalTransitionFrames = 6 * TRANSITION_DURATION;
 const totalDuration = totalSceneFrames - totalTransitionFrames;
 
 export const RemotionRoot: React.FC = () => {

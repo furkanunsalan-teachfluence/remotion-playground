@@ -10,7 +10,6 @@ import { Scene1Opening } from "./Scene1Opening";
 import { Scene2ValueProp } from "./Scene2ValueProp";
 import { Scene3CourseManagement } from "./Scene3CourseManagement";
 import { Scene4WebsiteBuilder } from "./Scene4WebsiteBuilder";
-import { Scene5EmailMarketing } from "./Scene5EmailMarketing";
 import { Scene6Features } from "./Scene6Features";
 import { Scene7SocialProof } from "./Scene7SocialProof";
 import { Scene8CTA } from "./Scene8CTA";
@@ -58,18 +57,7 @@ export const TeachfluenceVideo: React.FC = () => {
         <Scene4WebsiteBuilder />
       </TransitionSeries.Sequence>
 
-      {/* Transition 4→5: fade */}
-      <TransitionSeries.Transition
-        presentation={fade()}
-        timing={timing}
-      />
-
-      {/* Scene 5: Email Marketing */}
-      <TransitionSeries.Sequence durationInFrames={SCENE_DURATIONS.scene5}>
-        <Scene5EmailMarketing />
-      </TransitionSeries.Sequence>
-
-      {/* Transition 5→6: slide from right */}
+      {/* Transition 4→6: slide from right */}
       <TransitionSeries.Transition
         presentation={slide({ direction: "from-right" })}
         timing={timing}

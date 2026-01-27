@@ -2,7 +2,7 @@ import { loadFont } from "@remotion/google-fonts/Inter";
 
 export const { fontFamily } = loadFont("normal", {
   weights: ["400", "600", "700", "800"],
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
 export const COLORS = {
@@ -26,7 +26,6 @@ export const SCENE_DURATIONS = {
   scene2: 90, // 3s
   scene3: 135, // 4.5s
   scene4: 135, // 4.5s
-  scene5: 120, // 4s
   scene6: 120, // 4s
   scene7: 135, // 4.5s
   scene8: 120, // 4s

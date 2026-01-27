@@ -48,7 +48,10 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
       <div
         style={{
           width: 48,
+          minWidth: 48,
           height: 48,
+          minHeight: 48,
+          flexShrink: 0,
           borderRadius: "50%",
           background: COLORS.primary,
           display: "flex",
@@ -76,6 +79,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
             color: COLORS.textMuted,
             fontFamily,
             marginTop: 4,
+            whiteSpace: "nowrap",
           }}
         >
           {description}

@@ -3,20 +3,27 @@ import {
   AbsoluteFill,
   useCurrentFrame,
   useVideoConfig,
-  spring,
   interpolate,
 } from "remotion";
 import { COLORS, fontFamily } from "./constants";
 
 const words = [
-  { text: "Create.", color: COLORS.primary },
-  { text: "Teach.", color: COLORS.warningAccent },
-  { text: "Grow.", color: COLORS.primary },
+  { text: "Oluştur.", color: COLORS.primary },
+  { text: "Öğret.", color: COLORS.warningAccent },
+  { text: "Büyüt.", color: COLORS.primary },
 ];
 
 export const Scene2ValueProp: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { durationInFrames } = useVideoConfig();
+
+  // Fade out all words together near the end
+  const fadeOut = interpolate(
+    frame,
+    [durationInFrames - 25, durationInFrames - 5],
+    [1, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
 
   return (
     <AbsoluteFill
@@ -31,15 +38,19 @@ export const Scene2ValueProp: React.FC = () => {
       }}
     >
       {words.map((word, i) => {
-        const wordSpring = spring({
+        const entranceDelay = i * 10;
+        const scale = interpolate(
           frame,
-          fps,
-          delay: i * 8,
-          config: { damping: 10, stiffness: 120 },
-        });
-
-        const scale = interpolate(wordSpring, [0, 1], [0.5, 1]);
-        const opacity = interpolate(wordSpring, [0, 1], [0, 1]);
+          [entranceDelay, entranceDelay + 12],
+          [0.5, 1],
+          { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+        );
+        const entranceOpacity = interpolate(
+          frame,
+          [entranceDelay, entranceDelay + 12],
+          [0, 1],
+          { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+        );
 
         return (
           <div
@@ -49,7 +60,7 @@ export const Scene2ValueProp: React.FC = () => {
               fontWeight: 800,
               color: word.color,
               transform: `scale(${scale})`,
-              opacity,
+              opacity: entranceOpacity * fadeOut,
             }}
           >
             {word.text}

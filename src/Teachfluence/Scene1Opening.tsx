@@ -24,17 +24,8 @@ export const Scene1Opening: React.FC = () => {
   const logoScale = interpolate(logoSpring, [0, 1], [0, 1]);
   const logoOpacity = interpolate(logoSpring, [0, 1], [0, 1]);
 
-  // URL reveal: clip-path from right to left, starts after logo settles (~frame 30)
-  const urlRevealStart = 30;
-  const urlProgress = interpolate(
-    frame,
-    [urlRevealStart, urlRevealStart + 20],
-    [100, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-
-  // Tagline fade in: 0.5s (15 frames) after URL starts
-  const taglineStart = urlRevealStart + 15;
+  // Tagline fade in after logo settles
+  const taglineStart = 30;
   const taglineOpacity = interpolate(
     frame,
     [taglineStart, taglineStart + 15],
@@ -64,30 +55,17 @@ export const Scene1Opening: React.FC = () => {
         }}
       />
 
-      {/* URL */}
-      <div
-        style={{
-          marginTop: 16,
-          fontSize: 20,
-          fontWeight: 600,
-          color: COLORS.primary,
-          clipPath: `inset(0 ${urlProgress}% 0 0)`,
-        }}
-      >
-        teachfluence.com
-      </div>
-
       {/* Tagline */}
       <div
         style={{
-          marginTop: 12,
+          marginTop: 16,
           fontSize: 24,
           fontWeight: 400,
           color: COLORS.textMuted,
           opacity: taglineOpacity,
         }}
       >
-        The Modern Platform for Online Education
+        Online Eğitim İçin Modern Platform
       </div>
     </AbsoluteFill>
   );

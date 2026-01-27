@@ -43,7 +43,7 @@ export const Scene3CourseManagement: React.FC = () => {
           textAlign: "center",
         }}
       >
-        Manage your courses effortlessly
+        Kurslarınızı zahmetsizce yönetin
       </div>
 
       {/* Subtitle */}
@@ -56,7 +56,7 @@ export const Scene3CourseManagement: React.FC = () => {
           marginTop: 8,
         }}
       >
-        Track students, analytics & revenue in one dashboard
+        Öğrencileri, analizleri ve geliri tek panelden takip edin
       </div>
 
       {/* Browser frame */}

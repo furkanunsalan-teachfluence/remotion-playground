@@ -12,9 +12,9 @@ import { COLORS, fontFamily } from "./constants";
 import { StarIcon } from "./icons";
 
 const stats = [
-  { text: "2,000+ Students", color: COLORS.primary },
-  { text: "Active Courses", color: COLORS.text },
-  { text: "Growing Community", color: COLORS.warningAccent },
+  { text: "2.000+ Öğrenci", color: COLORS.primary },
+  { text: "Aktif Kurslar", color: COLORS.text },
+  { text: "Büyüyen Topluluk", color: COLORS.warningAccent },
 ];
 
 export const Scene7SocialProof: React.FC = () => {
@@ -69,7 +69,7 @@ export const Scene7SocialProof: React.FC = () => {
         }}
       >
         <StarIcon size={16} color="white" />
-        Trusted by educators worldwide
+        Dünya genelinde eğitimciler tarafından tercih ediliyor
       </div>
 
       {/* Showcase image */}
@@ -78,8 +78,6 @@ export const Scene7SocialProof: React.FC = () => {
         style={{
           maxWidth: 700,
           width: "100%",
-          borderRadius: 16,
-          boxShadow: "0 20px 60px rgba(0,0,0,0.12)",
           transform: `scale(${imageScale})`,
           opacity: imageOpacity,
         }}
