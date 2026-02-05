@@ -1,6 +1,7 @@
 import "./index.css";
 import { Composition } from "remotion";
 import { TeachfluenceVideo } from "./Teachfluence/TeachfluenceVideo";
+import { CertificateTemplate } from "./Teachfluence/CertificateTemplate";
 import { FPS, SCENE_DURATIONS, TRANSITION_DURATION } from "./Teachfluence/constants";
 
 const totalSceneFrames =
@@ -26,6 +27,14 @@ export const RemotionRoot: React.FC = () => {
         fps={FPS}
         width={1280}
         height={720}
+      />
+      <Composition
+        id="CertificateTemplate"
+        component={CertificateTemplate}
+        durationInFrames={1}
+        fps={FPS}
+        width={2474}
+        height={1748}
       />
     </>
   );
